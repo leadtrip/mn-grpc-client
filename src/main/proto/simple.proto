@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "wood.mike";
+option java_outer_classname = "SimpleMicroService";
+option objc_class_prefix = "HLW";
+
+package wood.mike;
+
+service SimpleService {
+  rpc send (SimpleRequest) returns (SimpleReply) {}
+}
+
+message SimpleRequest {
+  string name = 1;
+}
+
+message SimpleReply {
+  string message = 1;
+}

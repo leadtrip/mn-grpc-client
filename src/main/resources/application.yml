@@ -1,0 +1,4 @@
+grpc:
+  channels:
+    nodeservice:
+      address: "nodeservice:50051"
