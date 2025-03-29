@@ -3,21 +3,19 @@ package wood.mike;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 
-import java.util.UUID;
-
 @Controller("/api")
 public class MyController {
 
-    private final SimpleServiceGrpc.SimpleServiceBlockingStub blockingStub;
+    private final SimpleServiceGrpc.SimpleServiceBlockingStub asyncStub;
 
-    public MyController(SimpleServiceGrpc.SimpleServiceBlockingStub blockingStub) {
-        this.blockingStub = blockingStub;
+    public MyController(SimpleServiceGrpc.SimpleServiceBlockingStub asyncStub) {
+        this.asyncStub = asyncStub;
     }
 
-    @Get("/call")
-    public String callGrpcService() {
-        SimpleRequest request = SimpleRequest.newBuilder().setName(UUID.randomUUID().toString()).build();
-        SimpleReply response = blockingStub.send(request);
-        return response.getMessage();
+    @Get("/sayHi/{name}")
+    public String sayHi(String name) {
+        HelloRequest request = HelloRequest.newBuilder().setName(name).build();
+        System.out.println(asyncStub.sayHi(request));
+        return "Async gRPC call initiated.";
     }
 }

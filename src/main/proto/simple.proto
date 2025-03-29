@@ -8,13 +8,13 @@ option objc_class_prefix = "HLW";
 package wood.mike;
 
 service SimpleService {
-  rpc send (SimpleRequest) returns (SimpleReply) {}
+  rpc sayHi (HelloRequest) returns (HelloReply) {}
 }
 
-message SimpleRequest {
+message HelloRequest {
   string name = 1;
 }
 
-message SimpleReply {
+message HelloReply {
   string message = 1;
 }

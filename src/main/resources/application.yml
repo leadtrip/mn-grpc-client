@@ -1,4 +1,8 @@
 grpc:
   channels:
-    nodeservice:
-      address: "nodeservice:50051"
+    sayHi:
+      address: "localhost:50052"
+      plaintext: true
+      max-retry-attempts: 0
+  server:
+    enabled: false
