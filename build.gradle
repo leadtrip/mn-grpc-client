@@ -58,14 +58,14 @@ protobuf {
     }
     generateProtoTasks {
         all().each { task ->
-            task.inputs.dir(configurations.protobuf.files.singleFile) //Point to the dependency
+            task.inputs.dir(configurations.protobuf.files.singleFile)
             task.plugins { grpc {} }
         }
     }
     configurations {
         protobuf {
-            transitive = false // Important to avoid dependency conflicts.
-            resolutionStrategy.force('wood.mike:proto-definitions:1.0.0') //force the version.
+            transitive = false
+            resolutionStrategy.force('wood.mike:proto-definitions:1.0.0')
         }
     }
 }
