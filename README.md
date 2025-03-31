@@ -3,3 +3,5 @@
 ` ./gradlew generateProto`
 
 `./gradlew -Dorg.gradle.java.home=PATH-TO-A-JAVA-21-VERSION`
+
+`curl http://localhost:8099/api/sayHi/dave`

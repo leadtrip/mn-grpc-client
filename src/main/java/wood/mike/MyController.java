@@ -6,16 +6,15 @@ import io.micronaut.http.annotation.Get;
 @Controller("/api")
 public class MyController {
 
-    private final SimpleServiceGrpc.SimpleServiceBlockingStub asyncStub;
+    private final SimpleServiceGrpc.SimpleServiceBlockingStub blockingStub;
 
-    public MyController(SimpleServiceGrpc.SimpleServiceBlockingStub asyncStub) {
-        this.asyncStub = asyncStub;
+    public MyController(SimpleServiceGrpc.SimpleServiceBlockingStub blockingStub) {
+        this.blockingStub = blockingStub;
     }
 
     @Get("/sayHi/{name}")
     public String sayHi(String name) {
         HelloRequest request = HelloRequest.newBuilder().setName(name).build();
-        System.out.println(asyncStub.sayHi(request));
-        return "Async gRPC call initiated.";
+        return blockingStub.sayHi(request).getMessage();
     }
 }

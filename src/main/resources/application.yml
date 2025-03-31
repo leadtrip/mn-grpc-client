@@ -1,8 +1,18 @@
+micronaut:
+  application:
+    name: micronaut-grpc-client
+  server:
+    port: ${REST_SERVER_PORT:8099}
+my:
+  server:
+    host: ${GRPC_SERVER_HOST:localhost}
+    port: ${GRPC_SERVER_PORT:50052}
 grpc:
+  client:
+    plaintext: true # according to docs this can be set on the specific channel below but didn't work, always got SSL
   channels:
     sayHi:
-      address: "localhost:50052"
-      plaintext: true
+      address: "${my.server.host}:${my.server.port}"
       max-retry-attempts: 0
   server:
     enabled: false
