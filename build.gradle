@@ -9,6 +9,7 @@ group = "wood.mike"
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 dependencies {
@@ -22,6 +23,7 @@ dependencies {
     implementation("io.micronaut:micronaut-http-server-netty")
     implementation("io.micronaut.grpc:micronaut-grpc-client-runtime")
     runtimeOnly("org.yaml:snakeyaml")
+    implementation 'wood.mike:proto-definitions:1.0.0'
 }
 
 
@@ -44,12 +46,21 @@ sourceSets {
 }
 
 protobuf {
-    protoc { artifact = "com.google.protobuf:protoc:3.25.5" }
+    protoc { artifact = 'com.google.protobuf:protoc:3.25.5' }
     plugins {
-        grpc { artifact = "io.grpc:protoc-gen-grpc-java:1.68.1" }
+        grpc { artifact = 'io.grpc:protoc-gen-grpc-java:1.68.1' }
     }
     generateProtoTasks {
-        all()*.plugins { grpc {} }
+        all().each { task ->
+            task.inputs.dir(configurations.protobuf.files.singleFile) //Point to the dependency
+            task.plugins { grpc {} }
+        }
+    }
+    configurations {
+        protobuf {
+            transitive = false // Important to avoid dependency conflicts.
+            resolutionStrategy.force('wood.mike:proto-definitions:1.0.0') //force the version.
+        }
     }
 }
 
