@@ -4,6 +4,19 @@ micronaut:
   server:
     host: ${REST_SERVER_HOST:localhost}
     port: ${REST_SERVER_PORT:8099}
+  metrics:
+    enabled: true
+    export:
+      prometheus:
+        enabled: true
+        step: PT1M
+        descriptions: true
+endpoints:
+  all:
+    enabled: true
+  prometheus:
+    enabled: true
+    sensitive: false
 my:
   server:
     host: ${GRPC_SERVER_HOST:localhost}
@@ -15,5 +28,3 @@ grpc:
     sayHi:
       address: "${my.server.host}:${my.server.port}"
       max-retry-attempts: 0
-  server:
-    enabled: false

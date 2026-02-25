@@ -1,4 +1,4 @@
-FROM openjdk:21-slim
+FROM amazoncorretto:25-jdk
 
 COPY build/libs/*-all.jar /app/mn-grpc-client.jar
 
