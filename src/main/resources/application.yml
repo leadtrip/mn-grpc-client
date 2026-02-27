@@ -5,6 +5,8 @@ micronaut:
     host: ${REST_SERVER_HOST:localhost}
     port: ${REST_SERVER_PORT:8099}
   metrics:
+    common-tags:
+      application: ${micronaut.application.name}
     enabled: true
     export:
       prometheus:
